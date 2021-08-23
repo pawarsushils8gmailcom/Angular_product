@@ -1,0 +1,147 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<nav id="navbar-example2" class="navbar navbar-light button5">
+
+  <a class="navbar-brand  text-white" href="#">My Angular App</a>
+  <ul class="nav nav-pills">
+    <li class="nav-item">
+      <a class="nav-link text-white" href="#">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-white" href="#" >Product</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-white" href="javascript:void(0);"  (click)="logout()">Logout</a>
+    </li>
+  </ul>
+</nav>
+
+
+<div class="container-fluid">
+  <div class="text-center">
+    <p class="h2">Product Inventory</p>
+  </div>
+
+  <div class="row ">
+    <div class="col-md-6" style="margin-right: 25mm;">
+      <table class="table table-responsive">
+        <tr>
+          <th>Name</th>
+          <th>SKU</th>
+          <th>Description</th>
+          <th>Price</th>
+          <th>Stock Level</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
+        <!-- <tr align="left"  *ngFor="let data of itemsList">
+            <td> {{data.name}} </td>
+          </tr> -->
+
+        <tr *ngFor="let data of productList;let i=index">
+          <td>{{data.productName}}</td>
+          <td>{{data.sku}}</td>
+          <td>{{data.description}}</td>
+          <td>{{data.price}}</td>
+          <td>{{data.stockLevel}}</td>
+
+          <td> <button class='btn btn-info btn-xs btn-edit' (click)="getProduct(data.id)"><i
+                class="fa fa-edit"></i></button> </td>
+          <td><button class='btn btn-danger btn-delete' (click)="deleteProduct(data.id)"><i
+                class="fa fa-trash"></i></button> </td>
+        </tr>
+
+      </table>
+    </div>
+    <div class="col-md-2 " style="margin-left: 75mm;float:right">
+      <span class="border-left-xs"></span>
+
+      <p class="h4">Selected Product</p>
+      <form [formGroup]="regularForm" novalidate>
+        <div class="row mt-2">
+          <div class="col">
+            <div class="form-group">
+              <label for="productName">Name</label>
+              <input type="text" name="productName" id="productName" class="form-control" formControlName="productName"
+                required>
+              <small class="text-danger"
+                *ngIf="!regularForm.get('productName')?.valid && (regularForm.get('productName')?.dirty || regularForm.get('productName')?.touched)">Product
+                Name
+                Required</small>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col">
+            <div class="form-group">
+              <label for="sku">SKU</label>
+              <input type="text" name="sku" id="sku" class="form-control" formControlName="sku" required>
+              <small class="text-danger"
+                *ngIf="!regularForm.get('sku')?.valid && (regularForm.get('sku')?.dirty || regularForm.get('sku')?.touched)">SKU
+                Required</small>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-1">
+          <div class="col">
+            <div class="form-group">
+              <label for="desc">Description</label>
+              <input type="text" name="desc" id="desc" class="form-control" formControlName="desc" required>
+              <small class="text-danger"
+                *ngIf="!regularForm.get('desc')?.valid && (regularForm.get('desc')?.dirty || regularForm.get('desc')?.touched)">Description
+                Required</small>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col">
+            <div class="form-group">
+              <label for="price">Price</label>
+              <input type="text" name="price" id="price" class="form-control" formControlName="price" required>
+              <small class="text-danger"
+                *ngIf="!regularForm.get('price')?.valid && (regularForm.get('price')?.dirty || regularForm.get('price')?.touched)">Price
+                Required</small>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col">
+            <div class="form-group">
+              <label for="stockLevel">Stock Level</label>
+              <input type="text" name="stockLevel" id="stockLevel" class="form-control" formControlName="stockLevel"
+                required>
+              <small class="text-danger"
+                *ngIf="!regularForm.get('stockLevel')?.valid && (regularForm.get('stockLevel')?.dirty || regularForm.get('stockLevel')?.touched)">Stock
+                Level
+                Required</small>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col">
+            <div class="form-group">
+              <label for="email">Email</label>
+
+              <input type="email" name="email" id="email" class="form-control" formControlName="email" required>
+              <small class="text-danger"
+                *ngIf="!regularForm.get('email')?.valid && (regularForm.get('email')?.dirty || regularForm.get('email')?.touched)">Email
+                Required</small>
+
+
+            </div>
+          </div>
+        </div>
+
+      </form>
+      <div class="row mt-3">
+        <div class="col">
+          <button type="submit" class="btn btn btn-danger btn-block" [disabled]="!regularForm.valid"
+            (click)="saveProduct()">Create</button></div>
+            <div class="col">
+    <button class="btn button5 text-white" (click)="reset()"> Clear</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>
